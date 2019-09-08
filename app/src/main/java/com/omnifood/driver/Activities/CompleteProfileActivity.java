@@ -1,4 +1,4 @@
-package com.omnifood.driver;
+package com.omnifood.driver.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,9 +10,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.omnifood.driver.Activities.RegisterActivity;
 import com.omnifood.driver.Models.Courier;
 import com.omnifood.driver.Models.User;
+import com.omnifood.driver.OmnifoodApi;
+import com.omnifood.driver.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,6 +71,9 @@ public class CompleteProfileActivity extends AppCompatActivity {
                             Courier courier = response.body();
                             Toast.makeText(getApplicationContext(), "" + courier.getPhone(), Toast.LENGTH_SHORT).show();
                             Log.d(TAG, "onResponse: Courier Phone: " + courier.getPhone());
+
+                            Intent toListOrder = new Intent(getApplicationContext(), ListOrderActivity.class);
+                            startActivity(toListOrder);
                         }
 
                         @Override

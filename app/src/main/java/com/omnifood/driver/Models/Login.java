@@ -2,7 +2,9 @@ package com.omnifood.driver.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Login {
+import java.io.Serializable;
+
+public class Login implements Serializable {
 
     @SerializedName("username")
     private String username;

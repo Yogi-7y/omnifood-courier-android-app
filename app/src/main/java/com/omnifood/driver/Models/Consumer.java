@@ -4,23 +4,30 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Courier implements Serializable {
+public class Consumer implements Serializable {
 
-    @SerializedName("user")
-    private int id;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("name")
+    private String name;
     @SerializedName("phone")
     private String phone;
     @SerializedName("address")
     private String address;
 
-    public Courier(int id, String phone, String address) {
+    public Consumer(String id, String name, String phone, String address) {
         this.id = id;
+        this.name = name;
         this.phone = phone;
         this.address = address;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getPhone() {

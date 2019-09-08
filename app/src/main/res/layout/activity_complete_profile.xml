@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/register_background"
-    tools:context=".CompleteProfileActivity">
+    tools:context=".Activities.CompleteProfileActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

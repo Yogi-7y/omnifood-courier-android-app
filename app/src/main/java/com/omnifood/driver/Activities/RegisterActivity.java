@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.omnifood.driver.CompleteProfileActivity;
 import com.omnifood.driver.Models.User;
 import com.omnifood.driver.OmnifoodApi;
 import com.omnifood.driver.R;

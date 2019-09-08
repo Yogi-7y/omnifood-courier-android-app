@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?><!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/ready_list_order_parent"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="110dp"-->
+<!--    android:background="#00ffff"-->
+<!--    android:layout_margin="2dp">-->
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ready_list_order_parent"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:layout_margin="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/from_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/circle_image_view"
+            android:text="@string/from"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/restaurant_address_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/from_text_view"
+            android:textSize="16sp"
+            tools:text="Los Angeles" />
+
+        <TextView
+            android:id="@+id/to_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/from_text_view"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/circle_image_view"
+            android:text="@string/to"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/consumer_address_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/restaurant_address_text_view"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/to_text_view"
+            android:textSize="16sp"
+            tools:text="@string/los_vegas" />
+
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/to_text_view"
+            android:layout_toRightOf="@id/circle_image_view"
+            android:text="@string/contact"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/restaurant_contact_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/consumer_address_text_view"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/contact"
+            android:textSize="16sp"
+            tools:text="9868745879" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle_image_view"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="#ff000000" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+
+    <!--</RelativeLayout>-->
