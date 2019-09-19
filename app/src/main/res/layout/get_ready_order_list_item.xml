@@ -12,7 +12,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ready_list_order_parent"
     android:layout_width="match_parent"
+    app:cardBackgroundColor="#bb86fc"
     android:layout_height="110dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="24dp"
     android:layout_margin="2dp">
 
     <RelativeLayout
@@ -23,19 +26,20 @@
             android:id="@+id/from_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/circle_image_view"
             android:text="@string/from"
-            android:textColor="#000"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/restaurant_address_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="14dp"
             android:layout_toRightOf="@id/from_text_view"
             android:textSize="16sp"
+            android:textColor="@color/white"
             tools:text="Los Angeles" />
 
         <TextView
@@ -46,7 +50,7 @@
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/circle_image_view"
             android:text="@string/to"
-            android:textColor="#000"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
@@ -57,6 +61,7 @@
             android:layout_marginTop="6dp"
             android:layout_toRightOf="@id/to_text_view"
             android:textSize="16sp"
+            android:textColor="@color/white"
             tools:text="@string/los_vegas" />
 
         <TextView
@@ -66,7 +71,7 @@
             android:layout_below="@id/to_text_view"
             android:layout_toRightOf="@id/circle_image_view"
             android:text="@string/contact"
-            android:textColor="#000"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
@@ -75,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/consumer_address_text_view"
             android:layout_marginTop="6dp"
+            android:textColor="@color/white"
             android:layout_toRightOf="@id/contact"
             android:textSize="16sp"
             tools:text="9868745879" />

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.omnifood.driver.Models.ListReadyOrders;
+import com.omnifood.driver.Models.OrderDelivered;
 import com.omnifood.driver.Models.PickOrder;
 import com.omnifood.driver.Models.Status;
 import com.omnifood.driver.Models.Token;
@@ -33,11 +35,13 @@ public class PickOrderActivity extends AppCompatActivity {
 
     ImageView restaurantImageView;
     TextView consumerNameTextView, consumerPhoneTextView, consumerAddressTextView,
-            restaurantNameTextView, restaurantPhoneTextView, restaurantAddressTextView, totalTextView;
-    Button takeOrderButton;
+            restaurantNameTextView, restaurantPhoneTextView, restaurantAddressTextView, totalTextView,
+    getDirectionTextView;
+    Button takeOrderButton, orderDeliveredButton;
     OmnifoodApi omnifoodApi;
     ListReadyOrders listReadyOrders;
     Token token;
+    String latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,12 @@ public class PickOrderActivity extends AppCompatActivity {
         restaurantAddressTextView = findViewById(R.id.restaurant_address_value);
         totalTextView = findViewById(R.id.total_text_view_value);
         takeOrderButton = findViewById(R.id.take_order_button);
+        orderDeliveredButton = findViewById(R.id.order_delivered_button);
+//        getDirectionTextView = findViewById(R.id.get_direction);
+
+
+        orderDeliveredButton.setEnabled(false);
+        orderDeliveredButton.setBackgroundColor(getResources().getColor(R.color.gray_btn_bg_color));
 
 
         Glide.with(getApplicationContext())
@@ -83,6 +93,11 @@ public class PickOrderActivity extends AppCompatActivity {
         restaurantPhoneTextView.setText(listReadyOrders.getRestaurant().getPhone());
         restaurantAddressTextView.setText(listReadyOrders.getRestaurant().getAddress());
         totalTextView.setText(listReadyOrders.getTotal());
+
+        latitude = listReadyOrders.getConsumer().getLatitude();
+        longitude = listReadyOrders.getConsumer().getLongitude();
+        Log.d(TAG, "onCreate: Latitude: " + latitude);
+        Log.d(TAG, "onCreate: Longitude: " + longitude);
 
         takeOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +117,10 @@ public class PickOrderActivity extends AppCompatActivity {
                         Status status = response.body();
                         Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "onResponse: Order Picked ");
+                        orderDeliveredButton.setEnabled(true);
+                        orderDeliveredButton.setBackgroundColor(getResources().getColor(R.color.button_color));
+                        takeOrderButton.setEnabled(false);
+                        takeOrderButton.setBackgroundColor(getResources().getColor(R.color.gray_btn_bg_color));
                     }
 
                     @Override
@@ -112,6 +131,47 @@ public class PickOrderActivity extends AppCompatActivity {
                 });
             }
         });
+
+        orderDeliveredButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                OrderDelivered orderDelivered = new OrderDelivered(token.getToken(), listReadyOrders.getId());
+
+                Call<Status> statusCall = omnifoodApi.orderDelivered(orderDelivered.getToken(), orderDelivered.getOrderId());
+
+                statusCall.enqueue(new Callback<Status>() {
+                    @Override
+                    public void onResponse(Call<Status> call, Response<Status> response) {
+                        if(!response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "onResponse: Code: " + response.code());
+                            return;
+                        }
+
+                        Status status = response.body();
+                        Toast.makeText(getApplicationContext(), "" + status.getStatus(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Status> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onFailure: Error message: " + t.getMessage());
+                    }
+                });
+            }
+        });
+
+//        getDirectionTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                String uri = "https://www.google.com/maps?daddr="+latitude+","+longitude;
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                startActivity(intent);
+//            }
+//        });
 
     }
 }

@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
-    public static final String BASE_URL = "http://192.168.0.4:8000";
+    public static final String BASE_URL = "http://omnihost.herokuapp.com";
 
 
     private static final Pattern PASSWORD_PATTERN =
@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                             User user1 = response.body();
                             Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
 
-                            Intent toProfileIntent = new Intent(getApplicationContext(), CompleteProfileActivity.class);
+                            Intent toProfileIntent = new Intent(getApplicationContext(), LoginActivity.class);
                             toProfileIntent.putExtra("user", user1);
                             startActivity(toProfileIntent);
                         }

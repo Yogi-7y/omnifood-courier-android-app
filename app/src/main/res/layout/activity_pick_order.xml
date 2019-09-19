@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#607d8b"
     tools:context=".Activities.PickOrderActivity">
 
     <ImageView
@@ -23,56 +24,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/take_order_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/total_text_view"
-                android:layout_marginTop="20dp"
-                android:background="#00ffff"
-                android:text="@string/take_order"
-                android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/rs_symbol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/restaurant_info_card_view"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@id/total_text_view"
-                android:text="₹"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/total_text_view_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/restaurant_info_card_view"
-                android:layout_toRightOf="@id/rs_symbol"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                tools:text="380" />
-
-            <TextView
-                android:id="@+id/total_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/restaurant_info_card_view"
-                android:layout_marginLeft="20dp"
-                android:text="@string/total"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/consumer_info_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:layout_below="@id/pick_order_image"
-                android:layout_margin="4dp"
-                android:elevation="6dp">
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                app:cardCornerRadius="8dp"
+                app:cardBackgroundColor="#bb86fc"
+                app:cardElevation="10dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -85,7 +46,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginBottom="4dp"
                         android:text="@string/consumer"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -96,7 +57,7 @@
                         android:layout_below="@id/consumer_header"
                         android:layout_marginLeft="24dp"
                         android:text="@string/name"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -106,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/consumer_header"
                         android:layout_toRightOf="@id/consumer_name_header"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         tools:text="Tony Stark" />
 
@@ -117,7 +78,7 @@
                         android:layout_below="@id/consumer_name_header"
                         android:layout_marginLeft="24dp"
                         android:text="@string/phone_card_view"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -127,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/consumer_name_value"
                         android:layout_toRightOf="@id/consumer_phone_header"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         tools:text="9865745897" />
 
@@ -138,7 +99,7 @@
                         android:layout_below="@id/consumer_phone_header"
                         android:layout_marginLeft="24dp"
                         android:text="@string/address_card_view"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -148,9 +109,40 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/consumer_phone_value"
                         android:layout_toRightOf="@id/consumer_address_header"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         tools:text="California" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/consumer_address_value">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/get_direction"
+                            android:textSize="18sp"
+                            android:layout_toLeftOf="@id/get_direction"
+                            android:paddingBottom="5dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:layout_alignParentBottom="true"/>
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/get_direction"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/ic__ionicons_svg_md_navigate"
+
+                            />
+
+                    </RelativeLayout>
+
+
 
 
                 </RelativeLayout>
@@ -162,8 +154,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_below="@id/consumer_info_card_view"
-                android:layout_margin="4dp"
-                android:elevation="6dp">
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                app:cardBackgroundColor="#bb86fc"
+
+                android:layout_marginTop="4dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="10dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -176,7 +173,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginBottom="4dp"
                         android:text="@string/restaurant"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -187,7 +184,7 @@
                         android:layout_below="@id/restaurant_header"
                         android:layout_marginLeft="24dp"
                         android:text="@string/name"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -197,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/restaurant_header"
                         android:layout_toRightOf="@id/restaurant_name_header"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         tools:text="Tony Stark" />
 
@@ -208,7 +205,7 @@
                         android:layout_below="@id/restaurant_name_header"
                         android:layout_marginLeft="24dp"
                         android:text="@string/phone_card_view"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -218,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/restaurant_name_value"
                         android:layout_toRightOf="@id/restaurant_phone_header"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         tools:text="9865745897" />
 
@@ -229,7 +226,7 @@
                         android:layout_below="@id/restaurant_phone_header"
                         android:layout_marginLeft="24dp"
                         android:text="@string/address_card_view"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -239,7 +236,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/restaurant_phone_value"
                         android:layout_toRightOf="@id/restaurant_address_header"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         tools:text="California" />
 
@@ -247,6 +244,72 @@
                 </RelativeLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/rs_symbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/restaurant_info_card_view"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@id/total_text_view"
+                android:text="₹"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/total_text_view_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/restaurant_info_card_view"
+                android:layout_toRightOf="@id/rs_symbol"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                tools:text="380" />
+
+            <TextView
+                android:id="@+id/total_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/restaurant_info_card_view"
+                android:layout_marginLeft="20dp"
+                android:text="@string/total"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/total_text_view">
+
+
+                <Button
+                    android:id="@+id/take_order_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/total_text_view"
+                    android:layout_marginTop="20dp"
+                    android:background="#bb86fc"
+                    android:text="@string/take_order"
+                    android:textColor="#fff" />
+                <Button
+                    android:id="@+id/order_delivered_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/total_text_view"
+                    android:layout_toRightOf="@id/take_order_button"
+                    android:layout_marginTop="20dp"
+                    android:background="#03dac6"
+                    android:text="@string/order_delivered"
+                    android:textColor="#000" />
+
+            </LinearLayout>
 
         </RelativeLayout>
 

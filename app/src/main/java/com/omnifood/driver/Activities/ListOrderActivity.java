@@ -53,6 +53,43 @@ public class ListOrderActivity extends AppCompatActivity {
 
         omnifoodApi = retrofit.create(OmnifoodApi.class);
 
+        Call<List<ListReadyOrders>> listCall = omnifoodApi.getReadyOrders();
+        listCall.enqueue(new Callback<List<ListReadyOrders>>() {
+            @Override
+            public void onResponse(Call<List<ListReadyOrders>> call, Response<List<ListReadyOrders>> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onResponse: Code: " + response.code());
+                    return;
+                }
+
+                List<ListReadyOrders> listReadyOrders = response.body();
+                ArrayList<ListReadyOrders> listReadyOrdersArrayList = new ArrayList<>();
+
+                for (ListReadyOrders readyOrders : listReadyOrders) {
+                    listReadyOrdersArrayList.add(new ListReadyOrders(
+                            readyOrders.getId(),
+                            readyOrders.getConsumer(),
+                            readyOrders.getRestaurant(),
+                            readyOrders.getCourier(),
+                            readyOrders.getTotal(),
+                            readyOrders.getStatus(),
+                            readyOrders.getMeal()
+                    ));
+                }
+                Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                readyOrdersAdapter = new ReadyOrdersAdapter(getApplicationContext(), listReadyOrdersArrayList);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recyclerView.setAdapter(readyOrdersAdapter);
+            }
+            @Override
+            public void onFailure(Call<List<ListReadyOrders>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onFailure: Error message: " + t.getMessage() + "\n" + t.getStackTrace());
+            }
+        });
+
+
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -81,8 +118,8 @@ public class ListOrderActivity extends AppCompatActivity {
                                     readyOrders.getStatus(),
                                     readyOrders.getMeal()
                             ));
-                            Log.d(TAG, "onResponse: Ready Orders: " + readyOrders.getRestaurant().getName() + " \n" + readyOrders.getConsumer().getName());
-                            Log.d(TAG, "onResponse: RestaurantId: " + readyOrders.getMeal().getRestaurant() + "\n Meal: " + readyOrders.getMeal().getMeal());
+//                            Log.d(TAG, "onResponse: Ready Orders: " + readyOrders.getRestaurant().getName() + " \n" + readyOrders.getConsumer().getName());
+//                            Log.d(TAG, "onResponse: RestaurantId: " + readyOrders.getMeal().getRestaurant() + "\n Meal: " + readyOrders.getMeal().getMeal());
 
                         }
                         Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();

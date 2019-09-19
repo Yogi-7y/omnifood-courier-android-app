@@ -3,6 +3,8 @@ package com.omnifood.driver;
 import com.omnifood.driver.Models.Courier;
 import com.omnifood.driver.Models.ListReadyOrders;
 import com.omnifood.driver.Models.Login;
+import com.omnifood.driver.Models.OrderDelivered;
+import com.omnifood.driver.Models.OrderDetails;
 import com.omnifood.driver.Models.PickOrder;
 import com.omnifood.driver.Models.Status;
 import com.omnifood.driver.Models.Token;
@@ -37,5 +39,14 @@ public interface OmnifoodApi {
             @Field("token") String token,
             @Field("order_id") String orderId
     );
+
+    @FormUrlEncoded
+    @POST("restaurant/order/delivered/")
+    Call<Status> orderDelivered(
+            @Field("token") String token,
+            @Field("order_id") String orderId
+    );
+
+
 
 }

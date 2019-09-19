@@ -56,48 +56,78 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = loginUsername.getEditText().getText().toString().trim();
-                String password = loginPassword.getEditText().getText().toString().trim();
+                if (validateUsername() && validatePassword()) {
 
-                Login login = new Login(username, password);
+                    String username = loginUsername.getEditText().getText().toString().trim();
+                    String password = loginPassword.getEditText().getText().toString().trim();
 
-                Call<Token> loginCall = omnifoodApi.loginUser(login);
+                    Login login = new Login(username, password);
 
-                loginCall.enqueue(new Callback<Token>() {
-                    @Override
-                    public void onResponse(Call<Token> call, Response<Token> response) {
-                        if(!response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "onResponse: Code: " + response.code());
-                            return;
+                    Call<Token> loginCall = omnifoodApi.loginUser(login);
+
+                    loginCall.enqueue(new Callback<Token>() {
+                        @Override
+                        public void onResponse(Call<Token> call, Response<Token> response) {
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Make sure you entered correct username and password" , Toast.LENGTH_SHORT).show();                                Log.d(TAG, "onResponse: Code: " + response.code());
+                                return;
+                            }
+
+                            Token token = response.body();
+//                            Toast.makeText(getApplicationContext(), "You are successfully logged in.." + token.getFirstName(), Toast.LENGTH_SHORT).show();
+
+                            SharedPreferences sharedPreferences = getSharedPreferences("token", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            Gson gson = new Gson();
+                            String json = gson.toJson(token);
+                            editor.putString("token", json);
+                            editor.apply();
+
+                            Intent listOrderIntent = new Intent(getApplicationContext(), ListOrderActivity.class);
+                            startActivity(listOrderIntent);
                         }
 
-                        Token token = response.body();
-                        Toast.makeText(getApplicationContext(), "You are successfully logged in.." + token.getFirstName(), Toast.LENGTH_SHORT).show();
-
-                        SharedPreferences sharedPreferences =getSharedPreferences("token", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        Gson gson = new Gson();
-                        String json = gson.toJson(token);
-                        editor.putString("token", json);
-                        editor.apply();
-
-                        Intent listOrderIntent = new Intent(getApplicationContext(), ListOrderActivity.class);
-                        startActivity(listOrderIntent);
-                    }
-
-                    @Override
-                    public void onFailure(Call<Token> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "onFailure: Error message: " + t.getMessage());
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Token> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "onFailure: Error message: " + t.getMessage());
+                        }
+                    });
+                }
             }
         });
 
-//        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
-//        animationDrawable.setEnterFadeDuration(2000);
-//        animationDrawable.setExitFadeDuration(4000);
-//        animationDrawable.start();
+        signUpTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerIntent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(registerIntent);
+            }
+        });
+    }
+
+    private boolean validateUsername() {
+
+        String usernameInput = loginUsername.getEditText().getText().toString().trim();
+
+        if (usernameInput.isEmpty()) {
+            loginUsername.setError("Field can't be empty");
+            return false;
+        } else {
+            loginUsername.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        String passwordInput = loginPassword.getEditText().getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            loginPassword.setError("Field can't be empty");
+            return false;
+        } else {
+            loginPassword.setError(null);
+            return true;
+        }
     }
 }

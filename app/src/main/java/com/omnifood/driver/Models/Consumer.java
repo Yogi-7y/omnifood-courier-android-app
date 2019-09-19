@@ -14,12 +14,18 @@ public class Consumer implements Serializable {
     private String phone;
     @SerializedName("address")
     private String address;
+    @SerializedName("latitude")
+    private String latitude;
+    @SerializedName("longitude")
+    private String longitude;
 
-    public Consumer(String id, String name, String phone, String address) {
+    public Consumer(String id, String name, String phone, String address, String latitude, String longitude) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getId() {
@@ -36,5 +42,14 @@ public class Consumer implements Serializable {
 
     public String getAddress() {
         return address;
+    }
+
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
     }
 }
